@@ -2,10 +2,10 @@ import Link from "next/link";
 import Image from "next/image";
 import Head from "next/head";
 
-export const getServerSideProps = async () => {
+export const getStaticProps = async () => {
   const res = await fetch(`${process.env.API_URL}recent-release`);
   const recents = await res.json();
-  return { props: { recents } };
+  return { props: { recents }, revalidate: 2 };
 };
 
 const Recent = ({ recents }: { recents: Anime[] }) => {
