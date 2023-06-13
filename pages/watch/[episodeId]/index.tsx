@@ -1,8 +1,7 @@
 import Link from "next/link";
-import Image from "next/image";
 import Head from "next/head";
 
-export const getServerSideProps = async (context: {
+export const getStaticProps = async (context: {
   params: { episodeId: string };
 }) => {
   const episodeId = context.params.episodeId;

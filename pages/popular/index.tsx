@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import Head from "next/head";
 
-export const getServerSideProps = async () => {
+export const getStaticProps = async () => {
   const res = await fetch(`${process.env.API_URL}popular`);
   const popular = await res.json();
   return { props: { popular } };
