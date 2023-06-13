@@ -12,7 +12,8 @@ module.exports = {
     screens: {
       'xs': '450px',
       ...defaultTheme.screens,
-    }
+    },
+    // fontFamily: ['Inter', 'Roboto', 'Arial', 'sans-serif']
   },
   plugins: [],
 }
