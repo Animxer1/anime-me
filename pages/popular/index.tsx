@@ -1,11 +1,21 @@
 import Link from "next/link";
 import Image from "next/image";
 import Head from "next/head";
+import { GetStaticPaths } from "next/types";
 
 export const getStaticProps = async () => {
   const res = await fetch(`${process.env.API_URL}popular`);
   const popular = await res.json();
   return { props: { popular } };
+};
+
+export const getStaticPaths: GetStaticPaths<{
+  episodeId: string;
+}> = async () => {
+  return {
+    paths: [],
+    fallback: "blocking",
+  };
 };
 
 const Popular = ({ popular }: { popular: Anime[] }) => {
