@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Head from "next/head";
 import { GetStaticPaths } from "next/types";
+import VideoPlayer from "@/components/VideoPlayer";
 
 export const getStaticProps = async (context: {
   params: { episodeId: string };
@@ -61,12 +62,20 @@ const Watch = ({
           {animeInfo.totalEpisodes !== "1" && `Episode ${episodeNum}`}
         </h2>
         <div className="flex justify-center">
-          <iframe
+          {/* <iframe
             className="my-4 aspect-video w-80 h-64 sm:w-[400px] sm:h-[225px] md:w-[600px] md:h-[340px]"
             width="600"
             src={epData.Referer}
             allowFullScreen
             scrolling="no"
+          /> */}
+          <VideoPlayer
+            src={
+              ifNotLastEpisode || animeInfo.status !== "Ongoing"
+                ? epData.sources_bk[0].file
+                : epData.sources[0].file
+            }
+            className="my-4 aspect-video w-80 h-44 sm:w-[400px] sm:h-[225px] md:w-[600px] md:h-[340px]"
           />
         </div>
         <p className="text-sm sm:text-base text-center py-2">
@@ -99,6 +108,7 @@ const Watch = ({
               (e) =>
                 e.episodeNum === "0" || (
                   <Link
+                    key={e.episodeId}
                     className="link-btn"
                     href={`/watch/${e.episodeId.replace("episode", "ep")}`}
                   >
