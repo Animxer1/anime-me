@@ -1,7 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
 import Head from "next/head";
-import { GetStaticPaths } from "next/types";
 
 export const getStaticProps = async () => {
   const res = await fetch(`${process.env.API_URL}popular`);
@@ -9,9 +8,7 @@ export const getStaticProps = async () => {
   return { props: { popular } };
 };
 
-export const getStaticPaths: GetStaticPaths<{
-  episodeId: string;
-}> = async () => {
+export const getStaticPaths = async () => {
   return {
     paths: [],
     fallback: "blocking",

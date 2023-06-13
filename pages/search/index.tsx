@@ -10,9 +10,7 @@ export const getStaticProps = async (context: { query: { q: string } }) => {
   return { props: { q, searchResults } };
 };
 
-export const getStaticPaths: GetStaticPaths<{
-  episodeId: string;
-}> = async () => {
+export const getStaticPaths = async () => {
   return {
     paths: [],
     fallback: "blocking",
