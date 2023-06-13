@@ -1,6 +1,5 @@
 import Link from "next/link";
 import Head from "next/head";
-import { GetStaticPaths } from "next/types";
 
 export const getStaticProps = async (context: {
   params: { episodeId: string };
@@ -22,15 +21,6 @@ export const getStaticProps = async (context: {
     animeId = "dr-stone-new-world";
   }
   return { props: { episodeId, epData, animeId, animeInfo } };
-};
-
-export const getStaticPaths: GetStaticPaths<{
-  episodeId: string;
-}> = async () => {
-  return {
-    paths: [],
-    fallback: "blocking",
-  };
 };
 
 const Watch = ({

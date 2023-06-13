@@ -8,13 +8,6 @@ export const getStaticProps = async () => {
   return { props: { popular } };
 };
 
-export const getStaticPaths = async () => {
-  return {
-    paths: [],
-    fallback: "blocking",
-  };
-};
-
 const Popular = ({ popular }: { popular: Anime[] }) => {
   return (
     <>
