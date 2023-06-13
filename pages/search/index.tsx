@@ -1,9 +1,8 @@
 import Link from "next/link";
 import Image from "next/image";
 import Head from "next/head";
-import { GetStaticPaths } from "next/types";
 
-export const getStaticProps = async (context: { query: { q: string } }) => {
+export const getServerSideProps = async (context: { query: { q: string } }) => {
   const q = context.query.q;
   const res = await fetch(`${process.env.API_URL}search?keyw=${q}`);
   const searchResults = await res.json();
