@@ -58,8 +58,8 @@ export default function Home() {
         <Image
           className="fixed bottom-0 h-1/2 w-auto -z-10 hidden sm:block"
           src={GokuHalf}
-          width={500}
-          height={500}
+          width={400}
+          height={602}
           alt="goku"
           priority={true}
         />

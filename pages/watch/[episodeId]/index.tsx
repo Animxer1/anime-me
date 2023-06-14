@@ -70,8 +70,12 @@ const Watch = ({
             scrolling="no"
           /> */}
           <VideoPlayer
-            src={epData.sources[0].file}
-            className="my-4 aspect-video w-80 h-44 sm:w-[400px] sm:h-[225px] md:w-[600px] md:h-[340px]"
+            src={
+              ifNotLastEpisode || animeInfo.status !== "Ongoing"
+                ? epData.sources_bk[0].file
+                : epData.sources[0].file
+            }
+            className="my-4 aspect-video w-80 h-[180px] sm:w-[400px] sm:h-[225px] md:w-[600px] md:h-[340px]"
           />
         </div>
         <p className="text-sm sm:text-base text-center py-2">
