@@ -1,6 +1,9 @@
 import Link from "next/link";
 import Image from "next/image";
 import Head from "next/head";
+import { Inter } from "next/font/google";
+
+const inter = Inter({ subsets: ["latin"] });
 
 export const getServerSideProps = async (context: { query: { q: string } }) => {
   const q = context.query.q;
@@ -17,7 +20,7 @@ const Search = ({
   searchResults: Anime[];
 }) => {
   return (
-    <>
+    <div className={inter.className}>
       <Head>
         <title>Animetsu</title>
         <meta name="description" content="All your favourites are here..." />
@@ -53,7 +56,7 @@ const Search = ({
           </li>
         ))}
       </ul>
-    </>
+    </div>
   );
 };
 

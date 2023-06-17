@@ -1,9 +1,12 @@
 import Head from "next/head";
 import Link from "next/link";
 import Image from "next/image";
+import { Inter } from "next/font/google";
 import { useState } from "react";
 import GokuFull from "@/public/goku-full.png";
 import GokuHalf from "@/public/goku-half.png";
+
+const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
   const [query, setQuery] = useState<string>("");
@@ -13,7 +16,7 @@ export default function Home() {
         <title>Animetsu</title>
         <meta name="description" content="All your favourites are here..." />
       </Head>
-      <main className="flex flex-col items-center">
+      <main className={`${inter.className} flex flex-col items-center`}>
         <div className="flex justify-evenly items-center w-3/4 sm:w-1/2 md:w-1/3">
           <Link
             href="/popular"

@@ -1,6 +1,9 @@
 import Link from "next/link";
 import Image from "next/image";
 import Head from "next/head";
+import { Inter } from "next/font/google";
+
+const inter = Inter({ subsets: ["latin"] });
 
 export const getStaticProps = async () => {
   const res = await fetch(`${process.env.API_URL}popular`);
@@ -10,7 +13,7 @@ export const getStaticProps = async () => {
 
 const Popular = ({ popular }: { popular: Anime[] }) => {
   return (
-    <>
+    <div className={inter.className}>
       <Head>
         <title>Popular | Animetsu</title>
         <meta name="description" content="All your favourites are here..." />
@@ -46,7 +49,7 @@ const Popular = ({ popular }: { popular: Anime[] }) => {
           </li>
         ))}
       </ul>
-    </>
+    </div>
   );
 };
 

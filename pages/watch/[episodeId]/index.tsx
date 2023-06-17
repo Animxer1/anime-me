@@ -1,7 +1,10 @@
 import Link from "next/link";
 import Head from "next/head";
+import { Inter } from "next/font/google";
 import { GetStaticPaths } from "next/types";
 import VideoPlayer from "@/components/VideoPlayer";
+
+const inter = Inter({ subsets: ["latin"] });
 
 export const getStaticProps = async (context: {
   params: { episodeId: string };
@@ -56,7 +59,7 @@ const Watch = ({
         </title>
         <meta name="description" content="All your favourites are here..." />
       </Head>
-      <div>
+      <div className={inter.className}>
         <h2 className="text-sm xs:text-base sm:text-lg md:text-xl text-center">
           Playing, <b>{animeInfo.animeTitle}</b>{" "}
           {animeInfo.totalEpisodes !== "1" && `Episode ${episodeNum}`}

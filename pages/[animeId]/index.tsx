@@ -1,6 +1,9 @@
 import Link from "next/link";
 import Image from "next/image";
 import Head from "next/head";
+import { Inter } from "next/font/google";
+
+const inter = Inter({ subsets: ["latin"] });
 
 export const getServerSideProps = async (context: {
   params: { animeId: string };
@@ -19,7 +22,7 @@ const AnimeId = ({ animeInfo }: { animeInfo: AnimeInfo }) => {
         <title>{animeInfo.animeTitle} | Animetsu</title>
         <meta name="description" content="All your favourites are here..." />
       </Head>
-      <div className="mx-1 sm:mx-4 lg:mx-6">
+      <div className={`${inter.className} mx-1 sm:mx-4 lg:mx-6`}>
         <div id="info" className="flex flex-col lg:flex-row">
           <Image
             className="rounded-md w-auto md:h-96 mb-6 hidden md:block lg:mb-0"
