@@ -11,7 +11,6 @@ export default function VideoPlayer({ src }: { src: string }) {
     if (!video) return;
 
     video.controls = true;
-    const defaultOptions = {};
     if (video.canPlayType("application/vnd.apple.mpegurl")) {
       // This will run in safari, where HLS is supported natively
       video.src = src;
@@ -20,7 +19,11 @@ export default function VideoPlayer({ src }: { src: string }) {
 
       const hls = new Hls();
       hls.loadSource(src);
-      const player = new Plyr(video, defaultOptions);
+      const player = new Plyr(video, {
+        keyboard: { global: true },
+        tooltips: { controls: true },
+        ratio: "16:9",
+      });
       hls.attachMedia(video);
     } else {
       console.error(
