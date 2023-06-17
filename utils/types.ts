@@ -1,36 +1,39 @@
 type Anime = {
-  animeId: string;
-  animeTitle: string;
-  animeImg: string;
+  id: string;
+  title: string;
+  image: string;
   episodeId: string;
-  episodeNum: string;
+  episodeNumber: string;
+  releaseDate: string;
 };
 
 type Episode = {
-  episodeId: string;
-  episodeNum: string;
+  id: string;
+  number: string;
 };
 
 type AnimeInfo = {
-  animeId: string;
-  animeTitle: string;
+  id: string;
+  title: string;
   type: string;
-  animeImg: string;
+  image: string;
   status: string;
-  releasedDate: string;
+  releaseDate: string;
   genres: string[];
   totalEpisodes: string;
-  otherNames: string;
-  synopsis: string;
-  episodesList: Episode[];
+  otherName: string;
+  description: string;
+  episodes: Episode[];
 };
 
 type EpisodeSrc = {
-  file: string;
+  url: string;
+  isM3u8: boolean;
+  quality: string;
 };
 
 type EpisodeInfo = {
-  Referer: string;
+  headers: { Referer: string };
   sources: EpisodeSrc[];
-  sources_bk: EpisodeSrc[];
+  download: string;
 };

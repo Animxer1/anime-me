@@ -6,9 +6,9 @@ import { Inter } from "next/font/google";
 const inter = Inter({ subsets: ["latin"] });
 
 export const getStaticProps = async () => {
-  const res = await fetch(`${process.env.API_URL}recent-release`);
+  const res = await fetch(`${process.env.API_URL}recent-episodes`);
   const recents = await res.json();
-  return { props: { recents }, revalidate: 2 };
+  return { props: { recents: recents.results }, revalidate: 2 };
 };
 
 const Recent = ({ recents }: { recents: Anime[] }) => {
@@ -24,14 +24,14 @@ const Recent = ({ recents }: { recents: Anime[] }) => {
       <ul className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 md:gap-4">
         {recents.map((anime) => (
           <li
-            key={anime.animeId}
+            key={anime.id}
             className="mb-2 cursor-pointer"
-            title={anime.animeTitle}
+            title={anime.title}
           >
             <Link href={`/watch/${anime.episodeId.replace("episode", "ep")}`}>
               <Image
-                src={anime.animeImg}
-                alt={anime.animeTitle}
+                src={anime.image}
+                alt={anime.title}
                 width={250}
                 height={450}
                 loading="lazy"
@@ -39,14 +39,14 @@ const Recent = ({ recents }: { recents: Anime[] }) => {
                 className="mx-auto mb-2 rounded-md w-40 h-64 lg:w-64 lg:h-96"
               />
               <div className="text-center text-xs md:text-sm">
-                {anime.animeId === "oshi-no-ko"
+                {anime.id === "oshi-no-ko"
                   ? "Oshi no ko"
-                  : anime.animeId === "oshi-no-ko-dub"
+                  : anime.id === "oshi-no-ko-dub"
                   ? "Oshi no ko (Dub)"
-                  : anime.animeTitle}
+                  : anime.title}
               </div>
               <div className="text-center text-xs md:text-sm opacity-50">
-                Episode {anime.episodeNum}
+                Episode {anime.episodeNumber}
               </div>
             </Link>
           </li>

@@ -7,9 +7,9 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const getServerSideProps = async (context: { query: { q: string } }) => {
   const q = context.query.q;
-  const res = await fetch(`${process.env.API_URL}search?keyw=${q}`);
+  const res = await fetch(`${process.env.API_URL}${q}`);
   const searchResults = await res.json();
-  return { props: { q, searchResults } };
+  return { props: { q, searchResults: searchResults.results } };
 };
 
 const Search = ({
@@ -31,14 +31,14 @@ const Search = ({
       <ul className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 md:gap-4">
         {searchResults.map((anime) => (
           <li
-            key={anime.animeId}
+            key={anime.id}
             className="mb-2 cursor-pointer"
-            title={anime.animeTitle}
+            title={anime.title}
           >
-            <Link href={`/${anime.animeId}`}>
+            <Link href={`/${anime.id}`}>
               <Image
-                src={anime.animeImg}
-                alt={anime.animeTitle}
+                src={anime.image}
+                alt={anime.title}
                 width={250}
                 height={450}
                 loading="lazy"
@@ -46,11 +46,11 @@ const Search = ({
                 className="mx-auto mb-2 rounded-md w-40 h-64 lg:w-64 lg:h-96"
               />
               <div className="text-center text-xs md:text-sm">
-                {anime.animeId === "oshi-no-ko"
+                {anime.id === "oshi-no-ko"
                   ? "Oshi no ko"
-                  : anime.animeId === "oshi-no-ko-dub"
+                  : anime.id === "oshi-no-ko-dub"
                   ? "Oshi no ko (Dub)"
-                  : anime.animeTitle}
+                  : anime.title}
               </div>
             </Link>
           </li>

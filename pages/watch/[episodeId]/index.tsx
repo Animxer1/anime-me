@@ -11,16 +11,14 @@ export const getStaticProps = async (context: {
 }) => {
   const episodeId = context.params.episodeId;
   const epRes = await fetch(
-    `${process.env.API_URL}vidcdn/watch/${episodeId.replace("ep", "episode")}`
+    `${process.env.API_URL}watch/${episodeId.replace("ep", "episode")}`
   );
   const epData = await epRes.json();
   let animeId = episodeId.split("-ep-")[0];
   if (animeId === "dr-stone-new-world") {
     animeId = "dr-stone-3rd-season";
   }
-  const animeRes = await fetch(
-    `${process.env.API_URL}anime-details/${animeId}`
-  );
+  const animeRes = await fetch(`${process.env.API_URL}info/${animeId}`);
   const animeInfo = await animeRes.json();
   if (animeId === "dr-stone-3rd-season") {
     animeId = "dr-stone-new-world";
@@ -49,35 +47,38 @@ const Watch = ({
   animeInfo: AnimeInfo;
 }) => {
   const episodeNum: number = Number.parseInt(episodeId.split("-ep-")[1]);
-  const ifNotLastEpisode =
+  const ifNotLastEpisode: boolean =
     episodeNum !== Number.parseInt(animeInfo.totalEpisodes);
+  const episodesArray = [...animeInfo.episodes].reverse();
   return (
     <>
       <Head>
         <title>
-          {animeInfo.animeTitle} Episode {episodeNum} | Animetsu
+          {animeInfo.title} Episode {episodeNum} | Animetsu
         </title>
         <meta name="description" content="All your favourites are here..." />
       </Head>
       <div className={inter.className}>
         <h2 className="text-sm xs:text-base sm:text-lg md:text-xl text-center">
-          Playing, <b>{animeInfo.animeTitle}</b>{" "}
+          Playing,{" "}
+          <Link
+            className="font-bold hover:underline focus:underline"
+            href={`/${animeInfo.id}`}
+          >
+            {animeInfo.title}
+          </Link>{" "}
           {animeInfo.totalEpisodes !== "1" && `Episode ${episodeNum}`}
         </h2>
         <div className="flex justify-center">
           {/* <iframe
             className="my-4 aspect-video w-80 h-64 sm:w-[400px] sm:h-[225px] md:w-[600px] md:h-[340px]"
             width="600"
-            src={epData.Referer}
+            src={epData.headers.Referer}
             allowFullScreen
             scrolling="no"
           /> */}
           <VideoPlayer
-            src={
-              ifNotLastEpisode || animeInfo.status !== "Ongoing"
-                ? epData.sources_bk[0].file
-                : epData.sources[0].file
-            }
+            src={epData.sources[4].url}
             className="my-4 aspect-video w-80 h-[180px] sm:w-[400px] sm:h-[225px] md:w-[600px] md:h-[340px]"
           />
         </div>
@@ -103,19 +104,19 @@ const Watch = ({
             </Link>
           )}
         </div>
-        {animeInfo.totalEpisodes !== "1" && (
+        {animeInfo.episodes.length !== 1 && (
           <div
             className={`mt-8 mb-8 grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 lg:grid-cols-12 gap-4`}
           >
-            {animeInfo.episodesList.map(
+            {episodesArray.map(
               (e) =>
-                e.episodeNum === "0" || (
+                e.number === "0" || (
                   <Link
-                    key={e.episodeId}
+                    key={e.id}
                     className="link-btn"
-                    href={`/watch/${e.episodeId.replace("episode", "ep")}`}
+                    href={`/watch/${e.id.replace("episode", "ep")}`}
                   >
-                    {e.episodeNum}
+                    {e.number}
                   </Link>
                 )
             )}
