@@ -78,7 +78,7 @@ const Watch = ({
             scrolling="no"
           /> */}
           <div className="my-4 aspect-video w-80 h-[180px] sm:w-[400px] sm:h-[225px] md:w-[600px] md:h-[340px]">
-            <VideoPlayer src={epData.sources[4].url} />
+            <VideoPlayer src={epData.sources[epData.sources.length - 2].url} />
           </div>
         </div>
         <p className="text-sm sm:text-base text-center py-2">
