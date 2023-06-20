@@ -2,4 +2,6 @@
 All your favourites are here...
 ---
 
-An anime streaming website made using Next.js 13 and Tailwind CSS.
+A streaming platform with no ads and good performance.
+
+Tech Stack: TNT (Typescript, Next.js 13 and Tailwind CSS).
