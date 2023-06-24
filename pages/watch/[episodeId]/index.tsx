@@ -77,7 +77,7 @@ const Watch = ({
             allowFullScreen
             scrolling="no"
           /> */}
-          <div className="my-4 aspect-video w-80 h-[180px] sm:w-[400px] sm:h-[225px] md:w-[600px] md:h-[340px]">
+          <div className="my-4 aspect-video h-[180px] sm:h-[225px] md:h-[340px]">
             <VideoPlayer src={epData.sources[epData.sources.length - 2].url} />
           </div>
         </div>
