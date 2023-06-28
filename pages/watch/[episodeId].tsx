@@ -3,6 +3,7 @@ import Head from "next/head";
 import { Inter } from "next/font/google";
 import { GetStaticPaths } from "next/types";
 import VideoPlayer from "@/components/VideoPlayer";
+import HtmlHead from "@/components/HtmlHead";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -52,12 +53,7 @@ const Watch = ({
   const episodesArray = [...animeInfo.episodes].reverse();
   return (
     <>
-      <Head>
-        <title>
-          {animeInfo.title} Episode {episodeNum} | Animetsu
-        </title>
-        <meta name="description" content="All your favourites are here..." />
-      </Head>
+      <HtmlHead title={`${animeInfo.title} Episode ${episodeNum} | Animetsu`} />
       <div className={inter.className}>
         <h2 className="text-sm xs:text-base sm:text-lg md:text-xl text-center">
           Playing,{" "}

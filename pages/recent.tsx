@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import Head from "next/head";
 import { Inter } from "next/font/google";
+import HtmlHead from "@/components/HtmlHead";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -14,10 +15,7 @@ export const getStaticProps = async () => {
 const Recent = ({ recents }: { recents: Anime[] }) => {
   return (
     <div className={inter.className}>
-      <Head>
-        <title>Recents | Animetsu</title>
-        <meta name="description" content="All your favourites are here..." />
-      </Head>
+      <HtmlHead title="Recents | Animetsu" />
       <h1 className="text-center text-base sm:text-lg md:text-xl mb-4">
         Recent Releases
       </h1>

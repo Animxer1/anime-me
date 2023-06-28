@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import Head from "next/head";
 import { Inter } from "next/font/google";
+import HtmlHead from "@/components/HtmlHead";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -25,10 +26,7 @@ const AnimeId = ({ animeInfo }: { animeInfo: AnimeInfo }) => {
 
   return (
     <>
-      <Head>
-        <title>{animeInfo.title} | Animetsu</title>
-        <meta name="description" content="All your favourites are here..." />
-      </Head>
+      <HtmlHead title={`${animeInfo.title} | Animetsu`} />
       <div className={`${inter.className} mx-1 sm:mx-4 lg:mx-6`}>
         <div id="info" className="flex flex-col lg:flex-row">
           <Image

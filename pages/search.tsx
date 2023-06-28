@@ -2,27 +2,32 @@ import Link from "next/link";
 import Image from "next/image";
 import Head from "next/head";
 import { Inter } from "next/font/google";
+import HtmlHead from "@/components/HtmlHead";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export const getStaticProps = async () => {
-  const res = await fetch(`${process.env.API_URL}top-airing`);
-  const popular = await res.json();
-  return { props: { popular: popular.results } };
+export const getServerSideProps = async (context: { query: { q: string } }) => {
+  const q = context.query.q;
+  const res = await fetch(`${process.env.API_URL}${q}`);
+  const searchResults = await res.json();
+  return { props: { q, searchResults: searchResults.results } };
 };
 
-const Popular = ({ popular }: { popular: Anime[] }) => {
+const Search = ({
+  q,
+  searchResults,
+}: {
+  q: string;
+  searchResults: Anime[];
+}) => {
   return (
     <div className={inter.className}>
-      <Head>
-        <title>Popular | Animetsu</title>
-        <meta name="description" content="All your favourites are here..." />
-      </Head>
-      <h1 className="text-center text-base sm:text-lg md:text-xl mb-4">
-        Popular this season
+      <HtmlHead title="Animetsu" />
+      <h1 className="text-base sm:text-lg md:text-xl mb-4">
+        Search results for: <i>{q}</i>
       </h1>
       <ul className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2 md:gap-4">
-        {popular.map((anime) => (
+        {searchResults.map((anime) => (
           <li
             key={anime.id}
             className="mb-2 cursor-pointer"
@@ -53,4 +58,4 @@ const Popular = ({ popular }: { popular: Anime[] }) => {
   );
 };
 
-export default Popular;
+export default Search;

@@ -5,6 +5,7 @@ import { Inter } from "next/font/google";
 import { useState } from "react";
 import GokuFull from "@/public/goku-full.png";
 import GokuHalf from "@/public/goku-half.png";
+import HtmlHead from "@/components/HtmlHead";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -12,10 +13,7 @@ export default function Home() {
   const [query, setQuery] = useState<string>("");
   return (
     <>
-      <Head>
-        <title>Animetsu</title>
-        <meta name="description" content="All your favourites are here..." />
-      </Head>
+      <HtmlHead title="Animetsu" />
       <main className={`${inter.className} flex flex-col items-center`}>
         <div className="flex justify-evenly items-center w-3/4 sm:w-1/2 md:w-1/3">
           <Link
